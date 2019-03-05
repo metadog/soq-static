@@ -1,4 +1,3 @@
-
 const maxApiCallsRunning=1;let callsRunning=0;let callTimings=[];let currentCall=[];let integrationQueue=[];let integrationAttempts=[];let completedCalls=[];let sessionCallsPerLead=[];let sendButtons='';let callsRunningInterval=[];let createAllButtonsList=[];function runTask(el_id){const el=document.getElementById(el_id);let xdata_index=el.getAttribute('xdata-index');let xdata_id=el.getAttribute('xdata-id');let btn_active=el.getAttribute('ui-active');if(btn_active!=="true"){return}
 el.setAttribute('ui-active',"false");el.classList.add("btn-disabled");integrationQueue.push({"el_id":el_id,"xdata_index":xdata_index,"xdata_id":xdata_id,"start_time":'',"end_time":''});updatecallTimings();if(currentCall.length==0){ApiCallInit()}}
 function useAxios(callPassed){if(callPassed[0]==currentCall[0]){}else{ApiCallEnd({'error':'Interface Error: call mixup - Request aborted'},currentCall.xdata_index);return}
