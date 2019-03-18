@@ -11,7 +11,7 @@ function increaseCallsRunning(){callsRunning++}
 function ApiCallInit(){if(currentCall.length==1){}
 if(currentCall.length>1){console.log(` ! ! * ! ! * CURRENT CALL length VIOLATION ! * ! : ${JSON.stringify(currentCall)}`);console.log(` - currentCall: `);console.log(JSON.stringify(currentCall));console.log(` - integrationQueue: `);console.log(JSON.stringify(integrationQueue));console.log(` ... emptying both arrays`);integrationQueue=[];currentCall=[];ApiCallInit()}
 if(currentCall.length==0&&integrationQueue.length>0){let newCall=integrationQueue.shift();currentCall.push(newCall);if(currentCall.length==1){currentCall[0].start_time=Date.now();cc_xdata_id=currentCall[0].xdata_id;if(sessionCallsPerLead[cc_xdata_id]&&sessionCallsPerLead[cc_xdata_id].constructor.name=="Array"){sessionCallsPerLead[cc_xdata_id].push(currentCall[0])}else{sessionCallsPerLead[cc_xdata_id]=[];sessionCallsPerLead[cc_xdata_id].push(currentCall[0])}
-setTimeout(useAxios,2000,currentCall)}else{ApiCallInit()}}
+setTimeout(useAxios,4000,currentCall)}else{ApiCallInit()}}
 if(currentCall.length==0&&integrationQueue.length==0){completedCalls=[];document.getElementById('create-all-quotes').classList.remove('btn-disabled');document.getElementById('create-all-quotes').setAttribute('ui-active','true')}
 if(integrationQueue.length==0){updatecallTimings()}}
 function ApiCallEnd(callRes,xdata_index){currentCall[0].end_time=Date.now();if(xdata_index!==currentCall[0].xdata_index){console.log(` * * !!  PROBLEM - Call Mismatch: `);console.log(` *! -- xdata_index: ${xdata_index}`);console.log(` - currentCall['xdata_index']: ${currentCall[0]['xdata_index']}`);console.log(currentCall[0])}
